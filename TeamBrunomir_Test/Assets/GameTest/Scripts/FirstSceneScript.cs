@@ -10,6 +10,10 @@ public class FirstSceneScript : MonoBehaviour
     public DialogManager DialogManager;
     public Character CharacterEmotion;
     private DialogData Answer;
+    private const string OPTION_A = "A";
+    private const string OPTION_B = "B";
+    private const string OPTION_C = "C";
+    private const string SECOND_SCENE_NAME = "SecondScene";
 
     private void Awake()
     {
@@ -44,9 +48,9 @@ public class FirstSceneScript : MonoBehaviour
         dialogTexts.Add(new DialogData("Where you'll have to create a VERY simple mini game and make me react to it.", "Li"));
 
         Answer = new DialogData("Well... it´s time, choose a option", "Li");
-        Answer.SelectList.Add("A", "Option A");
-        Answer.SelectList.Add("B", "Option B");
-        Answer.SelectList.Add("C", "Option C");
+        Answer.SelectList.Add(OPTION_A, "Option A");
+        Answer.SelectList.Add(OPTION_B, "Option B");
+        Answer.SelectList.Add(OPTION_C, "Option C");
 
         Answer.Callback += Check;
 
@@ -57,7 +61,7 @@ public class FirstSceneScript : MonoBehaviour
 
     private void Check()
     {
-        if (DialogManager.Result == "A")
+        if (DialogManager.Result.Equals(OPTION_A))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
 
@@ -67,7 +71,7 @@ public class FirstSceneScript : MonoBehaviour
 
         }
 
-        if (DialogManager.Result == "B")
+        if (DialogManager.Result.Equals(OPTION_B))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
 
@@ -76,7 +80,7 @@ public class FirstSceneScript : MonoBehaviour
             DialogManager.Show(dialogTexts);
         }
 
-        if (DialogManager.Result == "C")
+        if (DialogManager.Result.Equals(OPTION_C))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
 
@@ -90,7 +94,7 @@ public class FirstSceneScript : MonoBehaviour
 
     private void ChangeScene()
     {
-        SceneManager.LoadScene("SecondScene");
+        SceneManager.LoadScene(SECOND_SCENE_NAME);
     }
 
     private void OnDisable()
