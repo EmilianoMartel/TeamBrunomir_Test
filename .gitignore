@@ -58,3 +58,13 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+TeamBrunomir_Test/Library/
+
+TeamBrunomir_Test/obj/
+
+TeamBrunomir_Test/UserSettings/
+
+TeamBrunomir_Test/Logs/
+
+TeamBrunomir_Test/.vsconfig
