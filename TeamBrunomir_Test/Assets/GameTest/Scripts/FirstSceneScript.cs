@@ -47,7 +47,7 @@ public class FirstSceneScript : MonoBehaviour
 
         dialogTexts.Add(new DialogData("Where you'll have to create a VERY simple mini game and make me react to it.", "Li"));
 
-        Answer = new DialogData("Well... it´s time, choose a option", "Li");
+        Answer = new DialogData("Well... itï¿½s time, choose a option", "Li");
         Answer.SelectList.Add(OPTION_A, "Option A");
         Answer.SelectList.Add(OPTION_B, "Option B");
         Answer.SelectList.Add(OPTION_C, "Option C");
