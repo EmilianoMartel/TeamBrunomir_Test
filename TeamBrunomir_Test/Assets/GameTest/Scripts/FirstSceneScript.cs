@@ -9,6 +9,8 @@ public class FirstSceneScript : MonoBehaviour
 {
     public DialogManager DialogManager;
     public Character CharacterEmotion;
+    public Data data;
+
     private DialogData Answer;
     private const string OPTION_A = "A";
     private const string OPTION_B = "B";
@@ -69,6 +71,7 @@ public class FirstSceneScript : MonoBehaviour
 
             DialogManager.Show(dialogTexts);
 
+            data.firstChoise = OPTION_A;
         }
 
         if (DialogManager.Result.Equals(OPTION_B))
@@ -78,6 +81,7 @@ public class FirstSceneScript : MonoBehaviour
             dialogTexts.Add(new DialogData("You choose B."));
 
             DialogManager.Show(dialogTexts);
+            data.firstChoise = OPTION_B;
         }
 
         if (DialogManager.Result.Equals(OPTION_C))
@@ -87,6 +91,7 @@ public class FirstSceneScript : MonoBehaviour
             dialogTexts.Add(new DialogData("You choose C."));
 
             DialogManager.Show(dialogTexts);
+            data.firstChoise = OPTION_C;
         }
 
         ChangeScene();
