@@ -6,6 +6,8 @@ TagManager:
   tags:
   - TextBox
   - Racket
+  - IaWall
+  - PlayerWall
   layers:
   - Default
   - TransparentFX
