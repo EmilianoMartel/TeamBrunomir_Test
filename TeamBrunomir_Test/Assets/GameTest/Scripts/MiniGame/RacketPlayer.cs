@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class RacketPlayer : MonoBehaviour
 {
-    [SerializeField] private float speed = 50f;
-    [SerializeField] private float yBoundMin = 214f;
-    
+    public Ball ball;
+
+    private float yLimit;
+    [SerializeField] private float speed = 5f;
+
+    void Start()
+    {
+        yLimit = gameObject.transform.position.y;
+    }
+
     void Update()
     {
         Move();
@@ -17,7 +24,7 @@ public class RacketPlayer : MonoBehaviour
     {
         float movement = Input.GetAxisRaw("Vertical");
         Vector2 racketPosition = transform.position;
-        racketPosition.y = Mathf.Clamp(racketPosition.y + movement * speed * Time.deltaTime, yBoundMin, yBoundMin+300f);
+        racketPosition.y = Mathf.Clamp(racketPosition.y + movement * speed * Time.deltaTime, (yLimit -15.7f) , yLimit + 15.7f);
         transform.position = racketPosition;
     }
 

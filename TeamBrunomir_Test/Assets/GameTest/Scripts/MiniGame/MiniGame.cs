@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class MiniGame : MonoBehaviour
 {
+    public float playerScore = 0f;
+    public float iaScore = 0f;
+    public SecondSceneScript secondScene;
 
+    [SerializeField] const string PLAYER_WIN = "player";
+    [SerializeField] const string IA_WIN = "win";
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        GameOver();
+    }
+
+    private void GameOver()
+    {
+        if (playerScore >= 5)
+        {
+            secondScene.EndScene(PLAYER_WIN);
+        }
+        if (iaScore >= 5)
+        {
+            secondScene.EndScene(IA_WIN);
+        }
     }
 }
