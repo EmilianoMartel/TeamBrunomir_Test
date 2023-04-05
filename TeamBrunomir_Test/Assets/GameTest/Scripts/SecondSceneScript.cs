@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Doublsb.Dialog;
+using UnityEngine.SceneManagement;
 
 public class SecondSceneScript : MonoBehaviour
 {
     List<DialogData> dialogTexts = new List<DialogData>();
     public DialogManager DialogManager;
     public MiniGame miniGame;
-    public Data data;
 
+    private DataManager dataManager;
     private DialogData DialogShort;
     private DialogData Answer;
-    private const string OPTION_A = "A";
-    private const string OPTION_B = "B";
-    private const string OPTION_C = "C";
+    private const string OPTION_A = "1";
+    private const string OPTION_B = "2";
+    private const string OPTION_C = "3";
     private const string OPTION_YES = "Yes";
     private const string OPTION_NO = "No";
-    private const string THEIR_SCENE_NAME = "ThierScene";
+    private const string THIRD_SCENE_NAME = "ThirdScene";
 
     private void Awake()
     {
+        dataManager = FindObjectOfType<DataManager>();
         miniGame.gameObject.SetActive(false);
 
         dialogTexts.Add(new DialogData("Here you can create any mini-game you can think of and make me react to it/emote:Happy/", "Li"));
@@ -33,22 +35,14 @@ public class SecondSceneScript : MonoBehaviour
 
         dialogTexts.Add(new DialogData("After the player finishes the game, make me say something and move to the ThirdScene.", "Li"));
 
-        //dialogTexts.Add(new DialogData("When you are ready play space bar and we play pong /emote:Happy/", "Li"));
-
         Answer = new DialogData("Are you ready?", "Li");
         Answer.SelectList.Add(OPTION_YES, "Yes");
         Answer.SelectList.Add(OPTION_NO, "No");
         Answer.Callback += Check;
-
         dialogTexts.Add(Answer);
-
         DialogManager.Show(dialogTexts);
     }
 
-    private void Update()
-    {
-        
-    }
     private void Check()
     {
         if (DialogManager.Result.Equals(OPTION_YES))
@@ -57,7 +51,7 @@ public class SecondSceneScript : MonoBehaviour
             DialogManager.Show(DialogShort);
             miniGame.gameObject.SetActive(true);
         }
-        if (DialogManager.Result.Equals(OPTION_NO)) //revisar
+        if (DialogManager.Result.Equals(OPTION_NO))
         {                 
             List<DialogData> answerText = new List<DialogData>();
             DialogData reAnswer;
@@ -91,10 +85,10 @@ public class SecondSceneScript : MonoBehaviour
             endText.Add(new DialogData("I win", "Li"));
         }
         DialogData endChoice;
-        endChoice = new DialogData("What are you think?","Li");
+        endChoice = new DialogData("How was the match?","Li");
         endChoice.SelectList.Add(OPTION_A, "Well played");
         endChoice.SelectList.Add(OPTION_B, "Easy match");
-        endChoice.SelectList.Add(OPTION_C, "You are a cheeting");
+        endChoice.SelectList.Add(OPTION_C, "You are a cheating");
         endChoice.Callback += EndCheck;
 
         endText.Add(endChoice);
@@ -103,7 +97,27 @@ public class SecondSceneScript : MonoBehaviour
 
     private void EndCheck()
     {
+        if (DialogManager.Result.Equals(OPTION_A))
+        {
+            dataManager.choise.Add(OPTION_A);
+        }
 
+        if (DialogManager.Result.Equals(OPTION_B))
+        {
+            dataManager.choise.Add(OPTION_B);
+        }
+
+        if (DialogManager.Result.Equals(OPTION_C))
+        {
+            dataManager.choise.Add(OPTION_C);
+        }
+
+        ChangeScene();
+    }
+
+    private void ChangeScene()
+    {
+        SceneManager.LoadScene(THIRD_SCENE_NAME);
     }
 
     public void MiniGame(string point)

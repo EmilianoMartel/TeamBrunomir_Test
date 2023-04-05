@@ -18,11 +18,11 @@ public class MiniGame : MonoBehaviour
 
     private void GameOver()
     {
-        if (playerScore >= 5)
+        if (playerScore >= 2)
         {
             secondScene.EndScene(PLAYER_WIN);
         }
-        if (iaScore >= 5)
+        if (iaScore >= 2)
         {
             secondScene.EndScene(IA_WIN);
         }

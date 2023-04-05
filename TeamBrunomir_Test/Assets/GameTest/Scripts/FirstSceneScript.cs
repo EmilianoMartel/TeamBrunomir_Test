@@ -9,16 +9,19 @@ public class FirstSceneScript : MonoBehaviour
 {
     public DialogManager DialogManager;
     public Character CharacterEmotion;
-    public Data data;
 
     private DialogData Answer;
+    private DataManager dataManager;
     private const string OPTION_A = "A";
     private const string OPTION_B = "B";
     private const string OPTION_C = "C";
     private const string SECOND_SCENE_NAME = "SecondScene";
 
+
     private void Awake()
     {
+        dataManager = FindObjectOfType<DataManager>();
+        
         List<DialogData> dialogTexts = new List<DialogData>();
 
         dialogTexts.Add(new DialogData("/size:up/Hi, /size:init/my name is Li.", "Li"));
@@ -53,11 +56,8 @@ public class FirstSceneScript : MonoBehaviour
         Answer.SelectList.Add(OPTION_A, "Option A");
         Answer.SelectList.Add(OPTION_B, "Option B");
         Answer.SelectList.Add(OPTION_C, "Option C");
-
         Answer.Callback += Check;
-
         dialogTexts.Add(Answer);
-
         DialogManager.Show(dialogTexts);
     }
 
@@ -66,32 +66,22 @@ public class FirstSceneScript : MonoBehaviour
         if (DialogManager.Result.Equals(OPTION_A))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
-
             dialogTexts.Add(new DialogData("You choose A."));
-
             DialogManager.Show(dialogTexts);
-
-            data.firstChoise = OPTION_A;
+            dataManager.choise.Add(OPTION_A);
         }
-
-        if (DialogManager.Result.Equals(OPTION_B))
+        else if (DialogManager.Result.Equals(OPTION_B))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
-
             dialogTexts.Add(new DialogData("You choose B."));
-
             DialogManager.Show(dialogTexts);
-            data.firstChoise = OPTION_B;
-        }
-
-        if (DialogManager.Result.Equals(OPTION_C))
+            dataManager.choise.Add(OPTION_B);        }
+        else if (DialogManager.Result.Equals(OPTION_C))
         {
             List<DialogData> dialogTexts = new List<DialogData>();
-
             dialogTexts.Add(new DialogData("You choose C."));
-
             DialogManager.Show(dialogTexts);
-            data.firstChoise = OPTION_C;
+            dataManager.choise.Add(OPTION_C);
         }
 
         ChangeScene();
